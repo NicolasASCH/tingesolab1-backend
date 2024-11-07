@@ -7,8 +7,8 @@ pipeline {
     stages {
         stage('Build maven') {
             steps {
-                checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/NicolasAMunozR/TingesoLab1-Backend']])
-                dir('backend') { // Cambia a la carpeta 'backend'
+                checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/NicolasASCH/tingesolab1-backend']])
+                dir('prestabanco-backend') { // Cambia a la carpeta 'backend'
                     bat 'mvn clean package' // Ejecuta Maven en la subcarpeta
                 }
             }
@@ -16,7 +16,7 @@ pipeline {
 
         stage('Unit Tests') {
             steps {
-                dir('backend') { // Cambia a la carpeta 'backend' donde está el pom.xml
+                dir('prestabanco-backend') { // Cambia a la carpeta 'backend' donde está el pom.xml
                     bat 'mvn test' // Ejecuta las pruebas unitarias
                 }
             }
@@ -25,7 +25,7 @@ pipeline {
         stage('Build docker image') {
             steps {
                 script {
-                    dir('backend') { // Cambia a la carpeta 'backend' para construir la imagen Docker
+                    dir('prestabanco-backend') { // Cambia a la carpeta 'backend' para construir la imagen Docker
                         bat 'docker build -t nickasch/backend:latest .' // Construye la imagen en la subcarpeta
                     }
                 }
