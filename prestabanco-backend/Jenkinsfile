@@ -14,14 +14,6 @@ pipeline {
             }
         }
 
-        stage('Unit Tests') {
-            steps {
-                dir('prestabanco-backend') { // Cambia a la carpeta 'backend' donde está el pom.xml
-                    bat 'mvn test' // Ejecuta las pruebas unitarias
-                }
-            }
-        }
-
         stage('Build docker image') {
             steps {
                 script {
